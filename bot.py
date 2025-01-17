@@ -1,10 +1,9 @@
 import telebot
 import buttons
 import database
-from geopy import Nominatim
+from geopy.geocoders import Nominatim
+geolocator = Nominatim(user_agent="geo_locator", timeout=10)
 
-geolocator = Nominatim(user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-                                  "(KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36")
 
 bot = telebot.TeleBot('7326578244:AAGWWYsRJ3UwFuyWms7pBLAzrLB2QJjD7yY')
 users = {}
@@ -23,11 +22,11 @@ def start(message):
         bot.register_next_step_handler(message, get_name)
 
 
-# @bot.message_handler(commands=['help'])
-# def help(message):
-#     user_id = message.from_user.id
-#     print(message)
-#     bot.send_message(user_id, 'Справочная информация', reply_markup=buttons.main_menu(database.get_all_pr()))
+@bot.message_handler(commands=['help'])
+def help(message):
+    user_id = message.from_user.id
+    print(message)
+    bot.send_message(user_id, 'Справочная информация', reply_markup=buttons.main_menu(database.get_all_pr()))
 
 
 def get_name(message):
@@ -58,7 +57,7 @@ def get_loc(message):
         print(longitude)
         latitude = message.location.latitude
         print(latitude)
-        address = geolocator.reverse((longitude, latitude)).address
+        address = geolocator.reverse((latitude,longitude )).address
         print(address)
 
 

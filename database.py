@@ -23,11 +23,11 @@ def check_user(tg_id):
         return False
 
 
-# def get_all_pr():
-#     return sql.execute('SELECT * FROM products;').fetchall()
-#
-#
-# def get_pr_buttons():
-#     all_products = sql.execute('SELECT pr_id, pr_name, pr_count FROM products;').fetchall()
-#     in_stock = [n for n in all_products if n[2] > 0]
-#     return in_stock
+def get_all_pr():
+    return sql.execute('SELECT * FROM products;').fetchall()
+
+
+def get_pr_buttons():
+    all_products = sql.execute('SELECT pr_id, pr_name, pr_count FROM products;').fetchall()
+    in_stock = [n for n in all_products if n[2] > 0]
+    return in_stock
