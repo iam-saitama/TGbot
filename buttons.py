@@ -14,8 +14,6 @@ def num_button():
 def main_menu(products):
     kb = types.InlineKeyboardMarkup(row_width=2)
     info = types.InlineKeyboardButton(text='Справочная информация', callback_data='info')
-    all_products = [types.InlineKeyboardButton(text=f'{i[1]}', callback_data=i[0]) for i in products]
-    kb.add(*all_products)
     kb.row(info)
 
     return kb
